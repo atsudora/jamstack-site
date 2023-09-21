@@ -1,18 +1,38 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
- */
+const path = require(`path`)
+const {createFilePath} = require(`gatsby-source-filesystem`)
+// この行はgatsby-source-filesystemプラグインからcreateFilePath関数をインポートしています。この関数は、ファイルに対する一意のパスを生成するために通常使用されます。
 
-/**
- * @type {import('gatsby').GatsbyNode['createPages']}
- */
-exports.createPages = async ({ actions }) => {
+/* 
+createPagesはGatsbyの別のライフサイクルAPIで、Gatsbyがページを生成する際に呼び出されます。
+GraphQLクエリを使用して、すでにslugフィールドを持つすべてのMarkdownRemarkノードを取得します。
+*/
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
-  })
+  const result = await graphql(`
+    query {
+      allContentfulBlog {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }`
+  )
+
+  result.data.allContentfulBlog.edges.forEach(({ node }) => {
+    createPage({
+    // 取得した各MarkdownRemarkノードに対して、createPage関数を呼び出してページを生成します。
+      path: node.slug,
+      component: path.resolve(`./src/templates/single-blog.js`),
+      context: {
+        slug: node.slug,
+      }
+      /* 
+      生成するページのパスはnode.fields.slugに設定されます。
+			生成するページのテンプレート（Reactコンポーネント）は./src/templates/single-blog.jsに設定されます。
+			生成するページのcontextにはslugが渡され、これはテンプレート内のGraphQLクエリで使用できます。
+      */
+    })
+  });
 }
