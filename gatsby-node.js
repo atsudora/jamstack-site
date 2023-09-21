@@ -1,6 +1,4 @@
 const path = require(`path`)
-const {createFilePath} = require(`gatsby-source-filesystem`)
-// この行はgatsby-source-filesystemプラグインからcreateFilePath関数をインポートしています。この関数は、ファイルに対する一意のパスを生成するために通常使用されます。
 
 /* 
 createPagesはGatsbyの別のライフサイクルAPIで、Gatsbyがページを生成する際に呼び出されます。

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
 import Layout from '../components/layout'
 import JSLogo from "../images/javascript.svg"
@@ -9,7 +9,7 @@ import NextLogo from "../images/next.svg"
 
 import * as style from "../styles/index.module.scss"
 
-const Index = () => {
+const Index = (props) => {
   return (
     <Layout>
       <div className={style.hero}>
@@ -30,7 +30,7 @@ const Index = () => {
         <div className={style.company}>
           <div>
             <h2>弊社について</h2>
-            <p>Last Update' 2031/03/14</p>
+            <p>Last Update' {props.data.contentfulLastupdate.lastupdate}</p>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
           </div>
         </div>
@@ -52,3 +52,11 @@ const Index = () => {
 }
 
 export default Index
+
+export const query = graphql`
+  query IndexQuery {
+    contentfulLastupdate {
+      lastupdate(formatString: "YYYY-MM-DD")
+    }
+  }
+`
