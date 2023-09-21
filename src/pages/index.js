@@ -3,7 +3,7 @@ import { Link, graphql } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
 import Layout from '../components/layout'
 import JSLogo from "../images/javascript.svg"
-import ReactLogo from "../images/React.svg"
+import ReactLogo from "../images/react.svg"
 import GatsbyLogo from "../images/gatsby.svg"
 import NextLogo from "../images/next.svg"
 
