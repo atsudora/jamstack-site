@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
-
+import Seo from '../components/seo'
 import * as style from "../styles/blog.module.scss"
 
 
@@ -10,6 +10,7 @@ const Blog = (props) => {
   console.log(props)
   return (
     <Layout>
+      <Seo title="ブログ" description="これはブログページです" />
       <div className={style.wrapper}>
         <div className={style.container}>
           <h1>Blog</h1>

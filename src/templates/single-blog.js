@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
-
+import Seo from '../components/seo'
 import * as style from "../styles/singleBlog.module.scss"
 
 
@@ -10,6 +10,7 @@ const SingleBlog = (props) => {
   console.log(props)
   return (
     <Layout>
+      <Seo title={props.data.contentfulBlog.title} description={props.data.contentfulBlog.excerpt} />
       <div className={style.hero}>
         <GatsbyImage
           image={props.data.contentfulBlog.image.gatsbyImageData}
